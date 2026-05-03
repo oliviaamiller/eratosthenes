@@ -1,8 +1,8 @@
 const Sieve = require("./sieve");
 
 describe("Sieve", () => {
+  const sieve = new Sieve();
   test("valid results", () => {
-    const sieve = new Sieve();
     expect(sieve.NthPrime(0)).toBe(2);
     expect(sieve.NthPrime(19)).toBe(71);
     expect(sieve.NthPrime(99)).toBe(541);
@@ -11,6 +11,24 @@ describe("Sieve", () => {
     expect(sieve.NthPrime(2_000)).toBe(17_393);
     expect(sieve.NthPrime(1_000_000)).toBe(15_485_867);
     expect(sieve.NthPrime(10_000_000)).toBe(179_424_691);
-    //expect(sieve.NthPrime(100_000_000)).toBe(2_038_074_751); not required, just a fun challenge
+    //expect(sieve.NthPrime(100_000_000)).toBe(2_038_074_751); passes around at ~47 seconds
+  });
+
+  test("invalid inputs", () => {
+    expect(() => sieve.NthPrime(-4)).toThrow(
+      "Input must be a non-negative integer",
+    );
+    expect(() => sieve.NthPrime(26.3)).toThrow(
+      "Input must be a non-negative integer",
+    );
+    expect(() => sieve.NthPrime("Two")).toThrow(
+      "Input must be a non-negative integer",
+    );
+    expect(() => sieve.NthPrime(null)).toThrow(
+      "Input must be a non-negative integer",
+    );
+    expect(() => sieve.NthPrime(undefined)).toThrow(
+      "Input must be a non-negative integer",
+    );
   });
 });
